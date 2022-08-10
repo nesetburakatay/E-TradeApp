@@ -1,0 +1,78 @@
+﻿@using E_TradeAppUI.Models
+@model Cart
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            @if (Model.CartLines.Count() > 0)
+            {
+                <table class="table table-bordered table-striped table-hovertable-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width:50px">Image</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">ProductName</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">SubTotal</th>
+                            <th scope="col"></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartLines)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="~/Uploads/@item.Product.Picture" class="fitImageSquare-80" alt="Alternate Text" />
+                                </td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Product.Name</td>
+                                <td>@item.Product.Price.ToString("c")</td>
+                                <td>@((item.Product.Price*item.Quantity).ToString("c"))</td>
+                                <td>
+                                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                                    {
+                                        @Html.Hidden("Id", item.Product.Id)
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Delete
+                                        </button>                                       
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td>@Model.Total().ToString("c")</td>
+                        </tr>
+
+                    </tfoot>
+                </table>
+
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Alışveriş sepetinizde Ürün Bulunmamaktadır.
+                </div>
+            }
+
+       
+
+
+
+        </div>
+    </div>
+</div>

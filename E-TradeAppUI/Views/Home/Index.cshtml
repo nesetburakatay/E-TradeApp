@@ -1,0 +1,51 @@
+﻿@using E_TradeAppUI.Models
+@using E_TradeAppUI.Entity
+
+@model IEnumerable<ProductModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+
+<div class="jumbotron">
+    <div class="container">
+
+        <h1 class="display-4">Hello, world!</h1>
+        <p class="lead">
+            This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+            to featured content or information.
+        </p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </div>
+
+</div>
+
+<div class="container pb-5 pt-5">
+    <div class="row mb-5">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card-deck mb-3">
+                    <div class="card opacity">
+                        <img src="~/Uploads/@item.Picture" class="card-img-top fitImageSquare" alt="@item.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            <a href="/Home/Details/@item.Id" class="stretched-link"></a>
+                            @*"HomecController" altındaki "Details metoduna" elemanın "id" sini gönderecek.*@
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">@item.Price</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

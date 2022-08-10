@@ -1,0 +1,12 @@
+﻿@using E_TradeAppUI.Entity
+@model IEnumerable<Category>
+
+<div class="list-group">
+    <a href="/Home/List" class="list-group-item list-group-item-action">Tüm Kategoriler</a>
+
+    @foreach (var item in Model)
+    {
+        <a href="/Home/List/@item.Id" class="list-group-item list-group-item-action">@item.Name</a>
+    }
+</div>
+
